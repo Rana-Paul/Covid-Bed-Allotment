@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashbord</title>
+  <style>
+    .only-hover {
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid mx-4">
+      <a class="navbar-brand" href="#">{{ us_name }}</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse mx-5" id="navbarNav">
+        <ul class="navbar-nav mx-5">
+          <li class="nav-item mx-5">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item mx-5">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item mx-5">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item mx-5">
+            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+          <li class="nav-item mx-5">
+            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- navbar finish -->
+  <div class="container text-center">
+    {% for mess in get_flashed_messages() %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{mess}}
+    </div>
+    {%endfor%}
+  </div>
+
+  <div class="container">
+    <div class="row my-5">
+
+      <div class="col-sm-12 col-md-6 col-lg-6 p-5 shadow only-hover rounded" data-bs-toggle="modal"
+        data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+
+        <div>
+
+          <div class="container  d-flex justify-content-center">
+            <img class="img-fluid w-75 my-2" src="/static/hospital.png" alt="">
+          </div>
+
+          <div class="container  d-flex justify-content-center my-4">
+            <h6>Add Hospitals</h6>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-sm-12 col-md-6 col-lg-6 p-5 shadow only-hover rounded" data-bs-toggle="modal"
+        data-bs-target="#paitent_exampleModal" data-bs-whatever="@mdo">
+
+        <div class="container  d-flex justify-content-center">
+          <img class="img-fluid w-50" src="/static/paitent.png" alt="">
+        </div>
+
+        <div class="container  d-flex justify-content-center">
+          <h6>Add Paitent</h6>
+        </div>
+
+      </div>
+
+      <div class="container">
+        <div class="row my-5">
+
+          <div class="col-sm-12 col-md-6 col-lg-6 p-5 shadow only-hover rounded">
+
+            <a href="{{ url_for('visit_hospital') }}" style="text-decoration: none; color:black">
+
+              <div>
+
+                <div class="container  d-flex justify-content-center">
+                  <img class="img-fluid w-75 my-2" src="/static/watch-h.png" alt="">
+                </div>
+
+                <div class="container  d-flex justify-content-center my-3">
+                  <h6>Watch All Hospitals Status</h6>
+                </div>
+            </a>
+          </div>
+
+        </div>
+
+
+        <div class="col-sm-12 col-md-6 col-lg-6 p-5 shadow only-hover rounded">
+
+          <a href="{{ url_for('visit_paitent') }}" style="text-decoration: none; color:black">
+
+            <div class="container  d-flex justify-content-center">
+              <img class="img-fluid w-75" src="/static/watch-p.png" alt="">
+            </div>
+
+            <div class="container  d-flex justify-content-center">
+              <h6>Watch All Paitent Status</h6>
+            </div>
+          </a>
+
+        </div>
+
+        <!-- Model -->
+
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+
+                <h5 class="modal-title" id="exampleModalLabel">Add Hospital</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+                <form action="{{ url_for('add_success') }}" method="post">
+                  <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">Hospital Name:</label>
+                    <input type="text" class="form-control" name="hospital_name" id="recipient-name">
+                  </div>
+                  <div class="mb-3">
+                    <label for="quantity" class="col-form-label">Avilable Beds:</label>
+                    <input type="number" class="form-control" id="message-text" name="avl_beds"></textarea>
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Add">
+                  </div>
+
+                </form>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Model Patient -->
+
+
+        <div class="modal fade" id="paitent_exampleModal" tabindex="-1" aria-labelledby="paitent_exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+
+                <h5 class="modal-title" id="exampleModalLabel">Add Paitent</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+                <form action="{{ url_for('paitent_add') }}" method="post">
+                  <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">Paitent Name:</label>
+                    <input type="text" class="form-control" name="paitent_name" id="recipient-name">
+                  </div>
+                  <div class="mb-3">
+                    <label for="quantity" class="col-form-label">Age:</label>
+                    <input type="number" class="form-control" id="message-text" name="age"></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label for="quantity" class="col-form-label">Phone Number:</label>
+                    <input type="Phone" class="form-control" id="message-text" name="ph_number"></textarea>
+                  </div>
+
+                  <select name="paitent_hospital" class="form-select" aria-label="Default select example">
+                    <option selected>Select Hospital</option>
+                    {% for list in hospital_list %}
+
+                    <option>{{ list.name }} ({{ list.sits }})</option>
+
+                    {% endfor %}
+
+                  </select>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Add">
+                  </div>
+
+                </form>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+</body>
+
+</html>
